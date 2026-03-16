@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>52 вопроса — годовая рассылка для саморефлексии</title>
+  <meta name="description" content="Раз в неделю одно письмо с темой для размышления и несколькими вопросами. Без шума. Без чужих мнений. Только вы и ваши мысли.">
+  <link rel="stylesheet" href="styles.css">
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+</head>
+<body>
+
+  <main>
+
+    <section class="hero">
+      <h1>52 вопроса, которые помогут лучше понять себя</h1>
+      <p class="subtitle">Годовая рассылка для тех, кто хочет разобраться в себе и своих решениях.</p>
+      <div class="description">
+        <p>Раз в неделю вы будете получать одно письмо: короткое объяснение темы и несколько вопросов или практик для размышления.</p>
+        <p>Без шума.<br>Без чужих мнений.<br>Только вы и ваши мысли.</p>
+      </div>
+      <p class="note">Можно начать бесплатно — первые 2 недели.</p>
+      <button type="button" class="btn btn-primary" id="open-modal">Попробовать бесплатно</button>
+    </section>
+
+    <hr class="divider">
+
+    <section class="what">
+      <h2>Что это</h2>
+      <p>Раз в неделю вы получаете одно письмо с темой для размышления и несколькими вопросами.</p>
+      <p>Эти вопросы собраны из разных подходов к саморефлексии — психологии, коучинга, философии и journaling-практик.</p>
+      <p>Вы можете уделить этому 20–30 минут, записать мысли или просто носить вопрос в голове всю неделю.</p>
+      <p>Через год у вас будет 52 небольших разговора с самим собой.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section class="pricing" id="pricing">
+      <h2>Попробовать</h2>
+      <p>Первые 2 недели бесплатно.</p>
+      <p>После этого доступ к рассылке стоит:</p>
+      <p class="price">2 900 ₽ в год</p>
+      <div class="buttons">
+        <stripe-buy-button
+          buy-button-id="buy_btn_1TBbn4QgYQDL4QBNZOeLDIUT"
+          publishable-key="pk_live_51TBZ70QgYQDL4QBNJlT7sNjzogwfpCCu0EfAOhTDAjT9VZke4Shxyx6nMWsk5I6klVIYN79tZezfWUrCxpShwf3f00itFa0SwO"
+        ></stripe-buy-button>
+        <a href="https://example.com/pay/russia" class="btn btn-secondary">Оплатить российской картой</a>
+      </div>
+      <p class="note">После оплаты вы начнёте автоматически получать письма раз в неделю.</p>
+    </section>
+
+  </main>
+
+  <!-- ---- Email signup modal ---- -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" role="dialog" aria-labelledby="modal-title">
+      <button type="button" class="modal-close" id="modal-close" aria-label="Закрыть">&times;</button>
+
+      <!-- Default state: the form -->
+      <div id="modal-form-state">
+        <h3 id="modal-title">Попробовать бесплатно</h3>
+        <p class="modal-text">Введите email — и вы начнёте получать письма.</p>
+        <form id="subscribe-form" novalidate>
+          <input
+            type="email"
+            id="email-input"
+            placeholder="your@email.com"
+            autocomplete="email"
+            required
+          >
+          <p class="form-error" id="form-error"></p>
+          <button type="submit" class="btn btn-primary modal-submit" id="submit-btn">
+            Подписаться
+          </button>
+        </form>
+      </div>
+
+      <!-- Success state -->
+      <div id="modal-success-state" class="modal-state hidden">
+        <div class="modal-icon">✓</div>
+        <h3>Готово!</h3>
+        <p class="modal-text">Проверьте вашу почту.</p>
+      </div>
+
+      <!-- Error state (server / network errors) -->
+      <div id="modal-error-state" class="modal-state hidden">
+        <div class="modal-icon modal-icon-error">!</div>
+        <h3>Что-то пошло не так</h3>
+        <p class="modal-text" id="modal-error-text"></p>
+        <button type="button" class="btn btn-secondary" id="retry-btn">Попробовать ещё раз</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Smooth-scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ---- Modal logic ----
+    var overlay   = document.getElementById('modal-overlay');
+    var formState = document.getElementById('modal-form-state');
+    var okState   = document.getElementById('modal-success-state');
+    var errState  = document.getElementById('modal-error-state');
+    var form      = document.getElementById('subscribe-form');
+    var input     = document.getElementById('email-input');
+    var submitBtn = document.getElementById('submit-btn');
+    var formError = document.getElementById('form-error');
+    var errText   = document.getElementById('modal-error-text');
+
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var isSubmitting = false;
+
+    function openModal() {
+      showState('form');
+      formError.textContent = '';
+      input.value = '';
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function () { input.focus(); }, 100);
+    }
+
+    function closeModal() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showState(name) {
+      formState.classList.toggle('hidden', name !== 'form');
+      okState.classList.toggle('hidden',   name !== 'success');
+      errState.classList.toggle('hidden',  name !== 'error');
+    }
+
+    // Open
+    document.getElementById('open-modal').addEventListener('click', openModal);
+
+    // Close on × button, overlay click, or Escape
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Retry goes back to the form
+    document.getElementById('retry-btn').addEventListener('click', function () {
+      showState('form');
+      input.focus();
+    });
+
+    // ---- Form submission ----
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (isSubmitting) return;
+
+      var email = input.value.trim();
+
+      // Client-side validation
+      if (!email) {
+        formError.textContent = 'Введите email.';
+        input.focus();
+        return;
+      }
+      if (!EMAIL_RE.test(email)) {
+        formError.textContent = 'Проверьте правильность email.';
+        input.focus();
+        return;
+      }
+
+      formError.textContent = '';
+      isSubmitting = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправляем…';
+
+      try {
+        var res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email }),
+        });
+        var data = await res.json();
+
+        if (res.ok && data.ok) {
+          showState('success');
+          setTimeout(closeModal, 4000);
+        } else {
+          errText.textContent = data.error || 'Попробуйте позже.';
+          showState('error');
+        }
+      } catch (_) {
+        errText.textContent = 'Нет связи с сервером. Попробуйте позже.';
+        showState('error');
+      } finally {
+        isSubmitting = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Подписаться';
+      }
+    });
+  </script>
+
+</body>
+</html>

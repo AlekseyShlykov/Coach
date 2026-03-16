@@ -1,0 +1,309 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #111;
+  background: #fff;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 80px 24px 120px;
+}
+
+/* ---- Hero ---- */
+
+.hero {
+  padding: 40px 0 0;
+}
+
+h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #444;
+  margin-bottom: 32px;
+}
+
+.description p {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.note {
+  font-size: 0.95rem;
+  color: #777;
+  margin-top: 28px;
+  margin-bottom: 32px;
+}
+
+/* ---- Sections ---- */
+
+.what,
+.pricing {
+  padding: 20px 0 0;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+
+.what p,
+.pricing p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+/* ---- Pricing ---- */
+
+.price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+  margin-top: 8px;
+  margin-bottom: 36px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+/* ---- Buttons ---- */
+
+.btn {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 16px 32px;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.15s;
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: #111;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #333;
+}
+
+.btn-secondary {
+  background: #f2f2f2;
+  color: #111;
+}
+
+.btn-secondary:hover {
+  background: #e5e5e5;
+}
+
+.hero .btn {
+  align-self: flex-start;
+}
+
+/* ---- Divider ---- */
+
+.divider {
+  border: none;
+  border-top: 1px solid #e8e8e8;
+  margin: 72px 0;
+}
+
+/* ---- Modal ---- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  transform: translateY(12px);
+  transition: transform 0.25s;
+}
+
+.modal-overlay.active .modal {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+}
+
+.modal-close:hover {
+  color: #111;
+}
+
+.modal h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.modal-text {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+#email-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#email-input:focus {
+  border-color: #111;
+}
+
+.form-error {
+  font-size: 0.9rem;
+  color: #c0392b;
+  min-height: 1.4em;
+  margin: 8px 0 0;
+}
+
+.modal-submit {
+  width: 100%;
+  margin-top: 16px;
+  border: none;
+  font-family: inherit;
+}
+
+.modal-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.modal-state {
+  text-align: center;
+}
+
+.modal-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.modal-icon-error {
+  background: #c0392b;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 600px) {
+  main {
+    padding: 48px 20px 80px;
+  }
+
+  h1 {
+    font-size: 1.85rem;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .description p,
+  .what p,
+  .pricing p {
+    font-size: 1rem;
+  }
+
+  .price {
+    font-size: 1.6rem;
+  }
+
+  .divider {
+    margin: 52px 0;
+  }
+
+  .modal {
+    padding: 36px 24px;
+  }
+}
