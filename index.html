@@ -20,7 +20,48 @@
         <p>Без шума.<br>Без чужих мнений.<br>Только вы и ваши мысли.</p>
       </div>
       <p class="note">Можно начать бесплатно — первые 2 недели.</p>
-      <button type="button" class="btn btn-primary" id="open-modal">Попробовать бесплатно</button>
+
+      <!-- MailerLite: free signup form (adds subscriber to your configured group) -->
+      <div class="signup">
+        <div id="mlb2-38538361" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-38538361">
+          <div class="ml-form-align-center">
+            <div class="ml-form-embedWrapper embedForm">
+              <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+                <div class="ml-form-embedContent" style="margin-bottom: 0;"></div>
+
+                <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2195786/forms/182110103999088566/subscribe" data-code="" method="post">
+                  <div class="ml-form-formContent">
+                    <div class="ml-form-fieldRow ml-last-item">
+                      <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                        <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Ваш email" autocomplete="email">
+                      </div>
+                    </div>
+                  </div>
+
+                  <input type="hidden" name="ml-submit" value="1">
+
+                  <div class="ml-form-embedSubmit">
+                    <button type="submit" class="primary">Попробовать бесплатно</button>
+                    <button disabled="disabled" style="display: none;" type="button" class="loading">
+                      <div class="ml-form-embedSubmitLoad"></div>
+                      <span class="sr-only">Loading...</span>
+                    </button>
+                  </div>
+
+                  <input type="hidden" name="anticsrf" value="true">
+                </form>
+              </div>
+
+              <div class="ml-form-successBody row-success" style="display: none">
+                <div class="ml-form-successContent">
+                  <h4>Готово!</h4>
+                  <p>Проверьте вашу почту.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <hr class="divider">
@@ -36,78 +77,37 @@
     <hr class="divider">
 
     <section class="pricing" id="pricing">
-      <h2>Попробовать</h2>
-      <p>Первые 2 недели бесплатно.</p>
-      <p>После этого доступ к рассылке стоит:</p>
+      <h2>Купить годовую подписку</h2>
       <p class="price">2 900 ₽ в год</p>
+
       <div class="buttons">
+        <p class="pay-label">Международные карты</p>
         <stripe-buy-button
           buy-button-id="buy_btn_1TBbn4QgYQDL4QBNZOeLDIUT"
           publishable-key="pk_live_51TBZ70QgYQDL4QBNJlT7sNjzogwfpCCu0EfAOhTDAjT9VZke4Shxyx6nMWsk5I6klVIYN79tZezfWUrCxpShwf3f00itFa0SwO"
         ></stripe-buy-button>
-        <a href="https://example.com/pay/russia" class="btn btn-secondary">Оплатить российской картой</a>
+
+        <p class="pay-label">Российские карты</p>
+        <a href="#" class="btn btn-secondary btn-disabled" aria-disabled="true">Скоро</a>
       </div>
+
       <p class="note">После оплаты вы начнёте автоматически получать письма раз в неделю.</p>
     </section>
 
   </main>
 
-  <div class="modal-overlay" id="modal-overlay">
-    <div class="modal" role="dialog" aria-label="Попробовать бесплатно">
-      <button type="button" class="modal-close" id="modal-close" aria-label="Закрыть">&times;</button>
-
-      <div id="mlb2-38538361" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-38538361">
-        <div class="ml-form-align-center">
-          <div class="ml-form-embedWrapper embedForm">
-            <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
-              <div class="ml-form-embedContent" style="margin-bottom: 0;"></div>
-
-              <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2195786/forms/182110103999088566/subscribe" data-code="" method="post" target="_blank">
-                <div class="ml-form-formContent">
-                  <div class="ml-form-fieldRow ml-last-item">
-                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
-                      <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Email" autocomplete="email">
-                    </div>
-                  </div>
-                </div>
-
-                <input type="hidden" name="ml-submit" value="1">
-
-                <div class="ml-form-embedSubmit">
-                  <button type="submit" class="primary">Попробовать бесплатно</button>
-                  <button disabled="disabled" style="display: none;" type="button" class="loading">
-                    <div class="ml-form-embedSubmitLoad"></div>
-                    <span class="sr-only">Loading...</span>
-                  </button>
-                </div>
-
-                <input type="hidden" name="anticsrf" value="true">
-              </form>
-            </div>
-
-            <div class="ml-form-successBody row-success" style="display: none">
-              <div class="ml-form-successContent">
-                <h4>Готово!</h4>
-                <p>Проверьте вашу почту.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <script>
-        function ml_webform_success_38538361() {
-          var $ = ml_jQuery || jQuery;
-          $('.ml-subscribe-form-38538361 .row-success').show();
-          $('.ml-subscribe-form-38538361 .row-form').hide();
-        }
-      </script>
-      <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v95037e5bac78f29ed026832ca21a7c7b" type="text/javascript"></script>
-      <script>
-        fetch("https://assets.mailerlite.com/jsonp/2195786/forms/182110103999088566/takel");
-      </script>
-    </div>
-  </div>
+  <script>
+    // MailerLite: switch to success state after subscribe
+    function ml_webform_success_38538361() {
+      var $ = ml_jQuery || jQuery;
+      $('.ml-subscribe-form-38538361 .row-success').show();
+      $('.ml-subscribe-form-38538361 .row-form').hide();
+    }
+  </script>
+  <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v95037e5bac78f29ed026832ca21a7c7b" type="text/javascript"></script>
+  <script>
+    fetch("https://assets.mailerlite.com/jsonp/2195786/forms/182110103999088566/takel");
+  </script>
 
   <script>
     // Smooth-scroll for anchor links
@@ -119,30 +119,6 @@
           target.scrollIntoView({ behavior: 'smooth' });
         }
       });
-    });
-
-    var overlay = document.getElementById('modal-overlay');
-
-    function openModal() {
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    // Open
-    document.getElementById('open-modal').addEventListener('click', openModal);
-
-    // Close on × button, overlay click, or Escape
-    document.getElementById('modal-close').addEventListener('click', closeModal);
-    overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) closeModal();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeModal();
     });
   </script>
 

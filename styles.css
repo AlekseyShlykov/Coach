@@ -96,6 +96,18 @@ h2 {
   margin-bottom: 32px;
 }
 
+.pay-label {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 8px 0 -4px;
+}
+
+.btn-disabled {
+  opacity: 0.65;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 /* ---- Buttons ---- */
 
 .btn {
@@ -136,65 +148,98 @@ h2 {
   align-self: flex-start;
 }
 
+/* ---- Signup form (MailerLite) ---- */
+
+.signup {
+  margin-top: 22px;
+  max-width: 520px;
+}
+
+/* Make the embedded wrapper neutral (no grey card look) */
+#mlb2-38538361.ml-form-embedContainer,
+#mlb2-38538361 .ml-form-embedWrapper,
+#mlb2-38538361 .ml-form-embedBody {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+#mlb2-38538361 .ml-form-embedBody {
+  padding: 0 !important;
+}
+
+/* Hide empty header/content block from embed */
+#mlb2-38538361 .ml-form-embedContent {
+  display: none !important;
+}
+
+/* Input matches site styling */
+#mlb2-38538361 input[type="email"] {
+  width: 100% !important;
+  padding: 14px 16px !important;
+  font-size: 1rem !important;
+  font-family: inherit !important;
+  color: #111 !important;
+  background: #fff !important;
+  border: 1.5px solid #ddd !important;
+  border-radius: 8px !important;
+  outline: none !important;
+  transition: border-color 0.2s !important;
+}
+
+#mlb2-38538361 input[type="email"]:focus {
+  border-color: #111 !important;
+}
+
+/* Submit button matches primary button */
+#mlb2-38538361 .ml-form-embedSubmit {
+  margin: 14px 0 0 !important;
+}
+
+#mlb2-38538361 .ml-form-embedSubmit button.primary {
+  width: 100% !important;
+  padding: 16px 32px !important;
+  border-radius: 8px !important;
+  background: #111 !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 1.05rem !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background 0.2s, transform 0.15s !important;
+}
+
+#mlb2-38538361 .ml-form-embedSubmit button.primary:hover {
+  background: #333 !important;
+}
+
+#mlb2-38538361 .ml-form-embedSubmit button.primary:active {
+  transform: scale(0.98) !important;
+}
+
+/* Success message typography */
+#mlb2-38538361 .ml-form-successContent h4 {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 8px !important;
+  font-family: inherit !important;
+  color: #111 !important;
+}
+
+#mlb2-38538361 .ml-form-successContent p {
+  font-size: 1rem !important;
+  margin: 0 !important;
+  font-family: inherit !important;
+  color: #444 !important;
+  line-height: 1.6 !important;
+}
+
 /* ---- Divider ---- */
 
 .divider {
   border: none;
   border-top: 1px solid #e8e8e8;
   margin: 72px 0;
-}
-
-/* ---- Modal ---- */
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s;
-  padding: 20px;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.modal {
-  background: #fff;
-  border-radius: 12px;
-  padding: 48px 40px;
-  width: 100%;
-  max-width: 440px;
-  position: relative;
-  transform: translateY(12px);
-  transition: transform 0.25s;
-}
-
-.modal-overlay.active .modal {
-  transform: translateY(0);
-}
-
-.modal-close {
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  color: #999;
-  cursor: pointer;
-  line-height: 1;
-  padding: 4px;
-}
-
-.modal-close:hover {
-  color: #111;
 }
 
 /* ---- Responsive ---- */
@@ -228,9 +273,5 @@ h2 {
 
   .divider {
     margin: 52px 0;
-  }
-
-  .modal {
-    padding: 36px 24px;
   }
 }
