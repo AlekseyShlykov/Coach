@@ -61,8 +61,30 @@ h1 {
 /* ---- Sections ---- */
 
 .what,
-.pricing {
+.pricing,
+.faq {
   padding: 20px 0 0;
+}
+
+/* ---- FAQ ---- */
+
+.faq-item {
+  margin-bottom: 40px;
+}
+
+.faq-item:last-child {
+  margin-bottom: 0;
+}
+
+.faq-item h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+.faq-item li {
+  margin-bottom: 4px;
 }
 
 h2 {
@@ -73,10 +95,25 @@ h2 {
 }
 
 .what p,
-.pricing p {
+.pricing p,
+.faq-item p,
+.faq-item ul {
   font-size: 1.1rem;
   color: #333;
   margin-bottom: 16px;
+}
+
+.faq-item p,
+.faq-item ul {
+  margin-bottom: 12px;
+}
+
+.faq-item ul {
+  padding-left: 1.25em;
+}
+
+.faq-item p:last-child {
+  margin-bottom: 0;
 }
 
 /* ---- Pricing ---- */
@@ -263,8 +300,14 @@ h2 {
 
   .description p,
   .what p,
-  .pricing p {
+  .pricing p,
+  .faq-item p,
+  .faq-item ul {
     font-size: 1rem;
+  }
+
+  .faq-item h3 {
+    font-size: 1.15rem;
   }
 
   .price {
