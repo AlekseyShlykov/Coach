@@ -235,7 +235,7 @@
     });
 
     // FAQ accordion: one open at a time, toggle on trigger click
-    (function () {
+    function initFaqAccordion() {
       var accordion = document.querySelector('.faq-accordion');
       if (!accordion) return;
       var items = accordion.querySelectorAll('.faq-accordion-item');
@@ -267,7 +267,13 @@
           if (!isOpen) openItem(item);
         });
       });
-    })();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFaqAccordion);
+    } else {
+      initFaqAccordion();
+    }
   </script>
 
 </body>
