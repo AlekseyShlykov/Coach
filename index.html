@@ -276,5 +276,35 @@
     }
   </script>
 
+<div id="paymentContainer"></div>
+<script src="https://integrationjs.tbank.ru/integration.js"
+        onload="onPaymentIntegrationLoad()"
+        async></script>
+        <script>
+          async function onPaymentIntegrationLoad(){
+          
+              const config = {
+                  terminalKey: "YOUR_TERMINAL_KEY",
+                  product: "eacq",
+                  features: {
+                      payment: {}
+                  }
+              }
+          
+              try {
+          
+                  const integration = await PaymentIntegration.init(config)
+          
+                  const container = document.getElementById("paymentContainer")
+          
+                  integration.payments.mount(container)
+          
+              } catch(e) {
+          
+                  console.error("Ошибка загрузки платежного виджета", e)
+          
+              }
+          }
+          </script>
 </body>
 </html>
