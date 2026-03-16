@@ -52,44 +52,60 @@
 
   </main>
 
-  <!-- ---- Email signup modal ---- -->
   <div class="modal-overlay" id="modal-overlay">
-    <div class="modal" role="dialog" aria-labelledby="modal-title">
+    <div class="modal" role="dialog" aria-label="Попробовать бесплатно">
       <button type="button" class="modal-close" id="modal-close" aria-label="Закрыть">&times;</button>
 
-      <!-- Default state: the form -->
-      <div id="modal-form-state">
-        <h3 id="modal-title">Попробовать бесплатно</h3>
-        <p class="modal-text">Введите email — и вы начнёте получать письма.</p>
-        <form id="subscribe-form" novalidate>
-          <input
-            type="email"
-            id="email-input"
-            placeholder="your@email.com"
-            autocomplete="email"
-            required
-          >
-          <p class="form-error" id="form-error"></p>
-          <button type="submit" class="btn btn-primary modal-submit" id="submit-btn">
-            Подписаться
-          </button>
-        </form>
+      <div id="mlb2-38538361" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-38538361">
+        <div class="ml-form-align-center">
+          <div class="ml-form-embedWrapper embedForm">
+            <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+              <div class="ml-form-embedContent" style="margin-bottom: 0;"></div>
+
+              <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2195786/forms/182110103999088566/subscribe" data-code="" method="post" target="_blank">
+                <div class="ml-form-formContent">
+                  <div class="ml-form-fieldRow ml-last-item">
+                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                      <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Email" autocomplete="email">
+                    </div>
+                  </div>
+                </div>
+
+                <input type="hidden" name="ml-submit" value="1">
+
+                <div class="ml-form-embedSubmit">
+                  <button type="submit" class="primary">Попробовать бесплатно</button>
+                  <button disabled="disabled" style="display: none;" type="button" class="loading">
+                    <div class="ml-form-embedSubmitLoad"></div>
+                    <span class="sr-only">Loading...</span>
+                  </button>
+                </div>
+
+                <input type="hidden" name="anticsrf" value="true">
+              </form>
+            </div>
+
+            <div class="ml-form-successBody row-success" style="display: none">
+              <div class="ml-form-successContent">
+                <h4>Готово!</h4>
+                <p>Проверьте вашу почту.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Success state -->
-      <div id="modal-success-state" class="modal-state hidden">
-        <div class="modal-icon">✓</div>
-        <h3>Готово!</h3>
-        <p class="modal-text">Проверьте вашу почту.</p>
-      </div>
-
-      <!-- Error state (server / network errors) -->
-      <div id="modal-error-state" class="modal-state hidden">
-        <div class="modal-icon modal-icon-error">!</div>
-        <h3>Что-то пошло не так</h3>
-        <p class="modal-text" id="modal-error-text"></p>
-        <button type="button" class="btn btn-secondary" id="retry-btn">Попробовать ещё раз</button>
-      </div>
+      <script>
+        function ml_webform_success_38538361() {
+          var $ = ml_jQuery || jQuery;
+          $('.ml-subscribe-form-38538361 .row-success').show();
+          $('.ml-subscribe-form-38538361 .row-form').hide();
+        }
+      </script>
+      <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v95037e5bac78f29ed026832ca21a7c7b" type="text/javascript"></script>
+      <script>
+        fetch("https://assets.mailerlite.com/jsonp/2195786/forms/182110103999088566/takel");
+      </script>
     </div>
   </div>
 
@@ -105,38 +121,16 @@
       });
     });
 
-    // ---- Modal logic ----
-    var overlay   = document.getElementById('modal-overlay');
-    var formState = document.getElementById('modal-form-state');
-    var okState   = document.getElementById('modal-success-state');
-    var errState  = document.getElementById('modal-error-state');
-    var form      = document.getElementById('subscribe-form');
-    var input     = document.getElementById('email-input');
-    var submitBtn = document.getElementById('submit-btn');
-    var formError = document.getElementById('form-error');
-    var errText   = document.getElementById('modal-error-text');
-
-    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    var isSubmitting = false;
+    var overlay = document.getElementById('modal-overlay');
 
     function openModal() {
-      showState('form');
-      formError.textContent = '';
-      input.value = '';
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
-      setTimeout(function () { input.focus(); }, 100);
     }
 
     function closeModal() {
       overlay.classList.remove('active');
       document.body.style.overflow = '';
-    }
-
-    function showState(name) {
-      formState.classList.toggle('hidden', name !== 'form');
-      okState.classList.toggle('hidden',   name !== 'success');
-      errState.classList.toggle('hidden',  name !== 'error');
     }
 
     // Open
@@ -149,61 +143,6 @@
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeModal();
-    });
-
-    // Retry goes back to the form
-    document.getElementById('retry-btn').addEventListener('click', function () {
-      showState('form');
-      input.focus();
-    });
-
-    // ---- Form submission ----
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      if (isSubmitting) return;
-
-      var email = input.value.trim();
-
-      // Client-side validation
-      if (!email) {
-        formError.textContent = 'Введите email.';
-        input.focus();
-        return;
-      }
-      if (!EMAIL_RE.test(email)) {
-        formError.textContent = 'Проверьте правильность email.';
-        input.focus();
-        return;
-      }
-
-      formError.textContent = '';
-      isSubmitting = true;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Отправляем…';
-
-      try {
-        var res = await fetch('/api/subscribe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email }),
-        });
-        var data = await res.json();
-
-        if (res.ok && data.ok) {
-          showState('success');
-          setTimeout(closeModal, 4000);
-        } else {
-          errText.textContent = data.error || 'Попробуйте позже.';
-          showState('error');
-        }
-      } catch (_) {
-        errText.textContent = 'Нет связи с сервером. Попробуйте позже.';
-        showState('error');
-      } finally {
-        isSubmitting = false;
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Подписаться';
-      }
     });
   </script>
 
