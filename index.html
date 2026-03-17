@@ -88,9 +88,8 @@
         ></stripe-buy-button>
 
         <p class="pay-label">Российские карты</p>
-        <div id="paymentContainer">
+        <div id="paymentContainer"></div>
         <a href="#" class="btn btn-secondary btn-disabled" aria-disabled="true">Скоро</a>
-        </div>
       </div>
 
       <p class="note">После оплаты вы начнёте автоматически получать письма раз в неделю.</p>
@@ -286,7 +285,7 @@
           async function onPaymentIntegrationLoad(){
           
               const config = {
-                  terminalKey: "YOUR_TERMINAL_KEY",
+                  terminalKey: "1773677268709DEMO",
                   product: "eacq",
                   features: {
                       payment: {}
@@ -296,10 +295,18 @@
               try {
           
                   const integration = await PaymentIntegration.init(config)
-          
-                  const container = document.getElementById("paymentContainer")
-          
-                  integration.payments.mount(container)
+
+                  const payment = await integration.createPayment({
+                         amount: 290000,   // 2900 ₽ (копейки)
+                         orderId: "order_" + Date.now(),
+                         description: "Годовая подписка — 52 вопроса"
+                     })
+
+                     const container = document.getElementById("paymentContainer")
+
+                   integration.payments.mount(container, {
+  paymentId: payment.paymentId
+                      })
           
               } catch(e) {
           
